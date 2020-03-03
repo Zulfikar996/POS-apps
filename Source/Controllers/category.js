@@ -15,8 +15,9 @@ module.exports = {
             const data ={
                 name : request.body.name
             } 
+            console.log(request.body)
             const result = await categoryModel.inputCategory(data)
-            miscHelper.response(response, 200, result)
+            miscHelper.response(response, 200, data)
         } catch (error) {
             miscHelper.customErrorResult(response, 404, 'Internal Server Error!')
           }   
@@ -28,10 +29,27 @@ module.exports = {
             }
             const categoryId = request.params.categoryId
             const result = await categoryModel.updateCategory(data, categoryId)
-            miscHelper.response(response, 200, result)
+            const editModel = {
+                ...data,
+                id : parseInt(categoryId)
+            }
+            miscHelper.response(response, 200, editModel)
         } catch (error) {
             miscHelper.customErrorResult(response, 404, 'Internal Server Error!')
           }   
+       },
+
+       deleteCategory : async (request, response) => {
+        try {
+            const categoryId = request.params.categoryId
+            const result = await categoryModel.deleteCategory(categoryId)
+            const deleteModel = {
+                        id : parseInt(categoryId)
+                    }
+            miscHelper.response(response, 200, deleteModel)
+        } catch (error) {
+            miscHelper.customErrorResult(response, 404, 'Internal Server Error!')
+          }
        }
        
 }

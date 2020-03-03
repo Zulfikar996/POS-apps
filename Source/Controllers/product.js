@@ -6,9 +6,9 @@ module.exports = {
          const category = request.query.category || ''
          const searchName = request.query.name || ''
          const sortBy = request.query.sortBy || 'id'
-         const limPro = request.query.limPro || 9999
+         const limit = request.query.limit || 9999
          const page = request.query.page || '1'
-         const result = await productModel.getAll(searchName, sortBy, limPro, page, category)
+         const result = await productModel.getAll(searchName, sortBy, limit, page, category)
          miscHelper.response(response, 200, result)
      } catch (error) {
          miscHelper.customErrorResult(response, 404, 'Internal Server Error!')
@@ -24,6 +24,7 @@ module.exports = {
           }   
        },
     inputProduct : async (request, response) => {
+        console.log(request.file.filename)
         try {
             const { name, category, price, stock } = request.body
             const data = {
@@ -36,7 +37,8 @@ module.exports = {
                 updated_at : new Date()
                 }
                 const result = await productModel.inputProduct(data)
-                miscHelper.response(response, 200, result)       
+                miscHelper.response(response, 200, data) 
+            console.log(request.body)      
             } 
         catch (error) {
             miscHelper.customErrorResult(response, 404, 'Internal Server Error!')
@@ -56,7 +58,11 @@ module.exports = {
             }
             const productId = request.params.productId
             const result = await productModel.updateProduct(data, productId)
-            miscHelper.response(response, 200, result)
+            const modelProduct = {
+                ...data,
+                id: parseInt(productId)
+            }
+            miscHelper.response(response, 200, modelProduct)
         } catch (error) {
             miscHelper.customErrorResult(response, 404, 'Internal Server Error!')
           }   
@@ -65,10 +71,13 @@ module.exports = {
         try {
             const productId = request.params.productId
             const result = await productModel.deleteProduct(productId)
-            miscHelper.response(response, 200, result)
+            const deleteModel = {
+                        id : parseInt(productId)
+                    }
+            miscHelper.response(response, 200, deleteModel)
         } catch (error) {
             miscHelper.customErrorResult(response, 404, 'Internal Server Error!')
-          }   
+          }
        }
        
 }

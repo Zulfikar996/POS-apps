@@ -1,12 +1,12 @@
 const connection = require('../Configs/mysql')
 
 module.exports = {
-    getAll : (searchName, sortBy, limPro, page, category) => {
+    getAll : (searchName, sortBy, limit, page, category) => {
         return new Promise((resolve, reject) => {
-            const firstProduct = ((limPro * page) - limPro)
+            const firstProduct = ((limit * page) - limit)
             connection.query(`SELECT p.id, p.name, c.name as category, p.price, p.stock, p.image, p.created_at, 
                         p.updated_at FROM product p LEFT JOIN category c ON p.category = c.id WHERE p.name
-                        LIKE '%${searchName}%' AND c.name LIKE '%${category}%' ORDER BY ${sortBy} ASC LIMIT ${firstProduct},${limPro}`, (error, result) => {
+                        LIKE '%${searchName}%' AND c.name LIKE '%${category}%' ORDER BY ${sortBy} ASC LIMIT ${firstProduct},${limit}`, (error, result) => {
                 if (error) reject(new Error(error))
                 resolve(result)
             })

@@ -25,7 +25,7 @@ module.exports = {
             })
         })
     },
-    deleteProduct : (categoryId) => {
+    deleteCategory : (categoryId) => {
         return new Promise((resolve, reject) => {
             connection.query('DELETE FROM category WHERE id = ?', categoryId , (error, result) => {
                 if (error) reject(new Error(error))
