@@ -10,6 +10,7 @@ module.exports = {
       const hashPassword = helper.setPassword(request.body.password, salt)
       const data = {
         name: request.body.name,
+        Status: request.body.Status,
         email: request.body.email,
         salt: hashPassword.salt,
         password: hashPassword.passwordHash,
@@ -17,7 +18,8 @@ module.exports = {
         updated_at: new Date()
       }
       const result = await userModel.register(data)
-      response.json(result)
+      data.id=result.insertId
+      response.json(data)
     } catch (error) {
       console.log(error)
     }

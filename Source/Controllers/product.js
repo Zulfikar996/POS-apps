@@ -8,8 +8,12 @@ module.exports = {
          const sortBy = request.query.sortBy || 'id'
          const limit = request.query.limit || 9999
          const page = request.query.page || '1'
+
          const result = await productModel.getAll(searchName, sortBy, limit, page, category)
-         miscHelper.response(response, 200, result)
+         const tData = await productModel.getAll(searchName, 'id', 1000, 1, category)
+         const tPage = Math.ceil(tData.length / limit)
+         console.log(tPage, tData)
+         miscHelper.response(response, 200, result, tPage)
      } catch (error) {
          miscHelper.customErrorResult(response, 404, 'Internal Server Error!')
        }   
@@ -24,7 +28,7 @@ module.exports = {
           }   
        },
     inputProduct : async (request, response) => {
-        console.log(request.file.filename)
+        console.log(request)
         try {
             const { name, category, price, stock } = request.body
             const data = {
@@ -32,11 +36,12 @@ module.exports = {
                 category,
                 price,
                 stock,
-                image : `http://localhost:4500/upload/${request.file.filename}`, 
+                // image : `http://localhost:4500/upload/${request.file.filename}`, 
                 created_at : new Date(),
                 updated_at : new Date()
                 }
                 const result = await productModel.inputProduct(data)
+                data.id=result.insertId
                 miscHelper.response(response, 200, data) 
             console.log(request.body)      
             } 
@@ -45,6 +50,7 @@ module.exports = {
           }   
        },
        updateProduct : async (request, response) => {
+        console.log(request.body)
         try {
             const { name, category, price, stock } = request.body
             data = {
@@ -52,7 +58,7 @@ module.exports = {
                 category,
                 price,
                 stock,
-                image : `http://localhost:4500/upload/${request.file.filename}`,
+                // image : `http://localhost:4500/upload/${request.file.filename}`,
                 updated_at : new Date()
 
             }

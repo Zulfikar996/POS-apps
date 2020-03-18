@@ -15,13 +15,14 @@ module.exports = {
             const data ={
                 name : request.body.name
             } 
-            console.log(request.body)
             const result = await categoryModel.inputCategory(data)
+            data.id=result.insertId
             miscHelper.response(response, 200, data)
         } catch (error) {
             miscHelper.customErrorResult(response, 404, 'Internal Server Error!')
           }   
        },
+       
     updateCategory : async (request, response) => {
         try {
             const data ={
