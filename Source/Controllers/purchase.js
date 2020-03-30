@@ -8,7 +8,7 @@ module.exports = {
             if (buy === undefined || buy === '') return console.log('Tidak ada data')
 
             var a = 0
-            await buy.products.map(e => {
+            await buy.products.map( async e => {
                 const data = {
                     idBuyer: buy.idBuyer,
                     idProduct: e.idProduct,
@@ -18,11 +18,15 @@ module.exports = {
                     date_added: new Date()
                 }
 
-                models.buy(data, a, date)
+                const result = await models.buy(data, a, date)
+                if(result === 'error'){
+                helpers.response(response, 400, 'false')}
                 a++
+                if(buy.products.length === a){
+                    helpers.response(response, 200, 'terima kasih telah berbelanja!')
+                }
             })
 
-            helpers.response(response, 200, 'terima kasih telah berbelanja!')
         } catch (error) {
             console.log(error)
             helpers.customErrorResponse(404, 'your request not found')

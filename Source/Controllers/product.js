@@ -1,5 +1,6 @@
 const productModel = require('../Models/product')
 const miscHelper = require('../Helpers')
+const {IP, port} = require('../Configs/index')
 module.exports = {
     getAll : async (request, response) => {
      try {
@@ -36,7 +37,7 @@ module.exports = {
                 category,
                 price,
                 stock,
-                // image : `http://localhost:4500/upload/${request.file.filename}`, 
+                image : `http://${IP}:${port}/upload/${request.file.filename}`, 
                 created_at : new Date(),
                 updated_at : new Date()
                 }

@@ -5,13 +5,13 @@ const route = express.Router()
 
 const {getAll, getDetail, inputProduct, updateProduct, deleteProduct } = require('../Controllers/product')
 
-// const { uploadImage } = require('../Controllers/upload')
+const { uploadImage } = require('../Controllers/upload')
 
 route
     .get('/', getAll)
     .get('/:productId', getDetail)
-    .post('/', inputProduct)
-    .patch('/:productId', updateProduct)
+    .post('/', uploadImage, inputProduct)
+    .patch('/:productId', uploadImage, updateProduct)
     .delete('/:productId', deleteProduct)
     
 

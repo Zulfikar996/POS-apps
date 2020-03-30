@@ -8,5 +8,6 @@ module.exports ={
         database : process.env.DB_DATABASE
     },
     port : process.env.PORT,
-    JWT_KEY : process.env.JWT_KEY
+    JWT_KEY : process.env.JWT_KEY,
+    IP : process.env.IP
 }

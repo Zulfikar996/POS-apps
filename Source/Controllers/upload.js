@@ -13,14 +13,14 @@ const fileFilter = (request, file, cb) => {
     if (filemim === 'image/jpg' || filemim === 'image/png' || filemim === 'image/jpeg' || filemim === 'image/gif' ){
         cb(null, true)
     } else {
-        cb(new Error('File not support!'), false)
+        cb("File not support!", false)
     }
 }
 const upload = multer({
         storage:storage,
         limits:
         {
-            fileSize: 5*1024*1024
+            fileSize: 3*1024*1024
         },
         fileFilter:fileFilter
 })
