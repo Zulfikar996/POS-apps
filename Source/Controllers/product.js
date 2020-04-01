@@ -13,7 +13,6 @@ module.exports = {
          const result = await productModel.getAll(searchName, sortBy, limit, page, category)
          const tData = await productModel.getAll(searchName, 'id', 1000, 1, category)
          const tPage = Math.ceil(tData.length / limit)
-         console.log(tPage, tData)
          miscHelper.response(response, 200, result, tPage)
      } catch (error) {
          miscHelper.customErrorResult(response, 404, 'Internal Server Error!')
@@ -59,7 +58,7 @@ module.exports = {
                 category,
                 price,
                 stock,
-                // image : `http://localhost:4500/upload/${request.file.filename}`,
+                image : `http://${IP}:${port}/upload/${request.file.filename}`, 
                 updated_at : new Date()
 
             }
