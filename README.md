@@ -18,8 +18,7 @@ To run this project,
 
 - install it locally using npm:
 
-`
-- [mysql](#)
+`- [mysql](#)
 - [crypto](#)
 - [jsonwebtoken](#)
 - [multer](#)
