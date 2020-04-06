@@ -1,8 +1,8 @@
 <section id="home">
-<h1 align="center">AsaUlu - Backend Point Of Sales</h1>
+<h1 align="center">FamiRest - Backend Point Of Sales</h1>
 
 
-AsaUlu is an application that can helps cashier to manage production such as add product, edit product, delete product even order product
+FamiRest is an application that can helps cashier to manage production such as add product, edit product, delete product even order product
 Express.js is a web application framework for Node.js. [More about Express](https://en.wikipedia.org/wiki/Express.js)
 </section>
 
@@ -40,24 +40,3 @@ Express.js is a web application framework for Node.js. [More about Express](http
 6. Open Postman desktop application or Chrome web app extension that has installed before
 7. Choose HTTP Method and enter request url.(ex. http://20.20.20.147:4040/order)
 8. You can see all the end point [here](#end-point)
-</section>
-
-<section id="setup-env">
-	
-## Set up env file
-Open .env file on your favorite code editor, and copy paste this code below :
-```
-PORT = 4040
-
-DB_HOST = 'localhost'
-DB_USER = 'root'
-DB_PASSWORD = ''
-DB_NAME = 'pof_db'
-
-JWT_KEY = 'thunder'
-```
-</section>
-
-<section id="end-point">
-
-## End Point
